@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Volunteer;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class SupervisorController extends Controller
 {
@@ -28,17 +30,32 @@ class SupervisorController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:Volunteers',
-            'password' => 'required|min:6',
-        ]);
-        $validated['password'] = bcrypt($validated['password']);
-        Volunteer::create($validated);
-        return redirect()->route('supervisor.index');
-    
-    }
+{
+    $validatedData = $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users,email',
+        'password' => 'required|min:6',
+        // Add validation for other Volunteer fields
+    ]);
+
+    // Create User
+    $user = User::create([
+        'name' => $validatedData['name'],
+        'email' => $validatedData['email'],
+        'password' => Hash::make($validatedData['password']),
+        // You might want to assign a specific role or permissions here
+    ]);
+
+    // Create Volunteer and link to User
+    $volunteer = new Volunteer();
+    $volunteer->user_id = $user->id;
+    $volunteer->name = $validatedData['name'];
+    $volunteer->email = $validatedData['email'];
+    $volunteer->password = $validatedData['password'];
+    $volunteer->save();
+
+    return redirect()->route('supervisor.index')->with('success', 'Volunteer added successfully');
+}
 
     /**
      * Display the specified resource.
