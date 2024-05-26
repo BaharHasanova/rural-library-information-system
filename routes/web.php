@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SupervisorController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\MemberController;
@@ -28,9 +27,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::middleware(['auth', 'role:supervisor'])->group(function () {
-    Route::resource('users', UserController::class);
-});
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('/category', CategoryController::class);
@@ -41,10 +37,3 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/volunteer', VolunteerController::class);
 });
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

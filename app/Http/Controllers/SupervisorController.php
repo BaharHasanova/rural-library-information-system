@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Volunteer;
 use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 
 class SupervisorController extends Controller
@@ -12,8 +13,21 @@ class SupervisorController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        // This will apply the 'isSupervisor' gate to all actions in this controller
+        $this->middleware(function ($request, $next) {
+            if (!Gate::allows('isSupervisor')) {
+                abort(403, 'Unauthorized access.');
+            }
+            return $next($request);
+        });
+    }
+
+
     public function index()
     {
+
         $volunteers = Volunteer::all();
         return view('supervisor.index', compact('volunteers'));
     }

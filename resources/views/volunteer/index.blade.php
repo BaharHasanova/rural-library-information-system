@@ -8,7 +8,7 @@
                 <h1>List of Members</h1>
             </div>
             <div class="col-auto">
-
+                @can('register-member')  <!-- Ensures only volunteers can see this button -->
                 <div class="dropdown" style="display: inline-block;">
                     <a href="{{ route('volunteer.create') }}" class="btn btn-success ml-3">Add New Member</a>
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -19,7 +19,7 @@
                         <a class="dropdown-item" href="{{ route('borrowings.index') }}">Borrowing View</a>
                     </div>
                 </div>
-               
+                @endcan
             </div>
         </div>
     </div>
