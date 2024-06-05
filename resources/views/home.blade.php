@@ -49,7 +49,6 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          {{-- <li><a class="nav-link scrollto active" href="#about">About</a></li> --}}
         @can('isSupervisor')
           <li><a class="nav-link scrollto" href="{{ route('supervisor.index') }}">Volunteers</a></li>
         @endcan

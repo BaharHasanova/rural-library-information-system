@@ -28,12 +28,12 @@ class UsersSeeder extends Seeder
         DB::table('users')->insert(['name' => 'Admin','email' => 'admin@uniten.edu.my','password' => bcrypt('password123'), 'userLevel'=>'0', 'userType'=>'Supervisor']);
 
         //insert multiple
-        $users =[
-            ['name' => 'user1', 'email' => 'user1@uniten.edu.my', 'password' => bcrypt('password123'), 'userLevel'=>'1', 'userType'=>'Volunteer'],
-            ['name' => 'user2', 'email' => 'user2@uniten.edu.my', 'password' => bcrypt('password123'), 'userLevel'=>'1', 'userType'=>'Volunteer'],
-            ['name' => 'user3', 'email' => 'user3@uniten.edu.my', 'password' => bcrypt('password123'), 'userLevel'=>'1', 'userType'=>'Volunteer'],
-        ];
+        // $users =[
+        //     ['name' => 'user1', 'email' => 'user1@uniten.edu.my', 'password' => bcrypt('password123'), 'userLevel'=>'1', 'userType'=>'Volunteer'],
+        //     ['name' => 'user2', 'email' => 'user2@uniten.edu.my', 'password' => bcrypt('password123'), 'userLevel'=>'1', 'userType'=>'Volunteer'],
+        //     ['name' => 'user3', 'email' => 'user3@uniten.edu.my', 'password' => bcrypt('password123'), 'userLevel'=>'1', 'userType'=>'Volunteer'],
+        // ];
 
-        DB::table('users')->insert($users);
+        // DB::table('users')->insert($users);
     }
 }
